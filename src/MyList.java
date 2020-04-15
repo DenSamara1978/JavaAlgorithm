@@ -9,6 +9,15 @@ public class MyList<Item> {
         size = 0;
     }
 
+    public MyList ( MyList<Item> list ) {
+        Node<Item> node = list.head;
+        while ( node != null ) {
+            insertTail((Item) node.getValue());
+            node = node.getNext();
+        }
+        size = list.size ();
+    }
+
     public int size () {
         return size;
     }
@@ -124,8 +133,14 @@ public class MyList<Item> {
         Node<Item> node = searchNode ( item );
         if ( node == null )
             return null;
-        node.getNext().setPrev(node.getPrev());
-        node.getPrev().setNext(node.getNext());
+        if ( node != tail )
+            node.getNext().setPrev(node.getPrev());
+        else
+            tail = node.getPrev();
+        if ( node != head )
+            node.getPrev().setNext(node.getNext());
+        else
+            head = node.getNext();
         node.setNext(null);
         node.setPrev(null);
         --size;
@@ -135,17 +150,16 @@ public class MyList<Item> {
     public Item remove ( int index ) {
         if ( index <= 0 )
             return removeHead();
-        else if ( index > size - 1 )
+        else if ( index >= size - 1 )
             return removeTail();
-        else {
-            --size;
-            Node<Item> node = searchNode ( index );
-            node.getNext().setPrev(node.getPrev());
-            node.getPrev().setNext(node.getNext());
-            node.setNext(null);
-            node.setPrev(null);
-            return node.getValue();
-        }
+
+        --size;
+        Node<Item> node = searchNode ( index );
+        node.getNext().setPrev(node.getPrev());
+        node.getPrev().setNext(node.getNext());
+        node.setNext(null);
+        node.setPrev(null);
+        return node.getValue();
     }
 
     public Item get ( int index ) {
