@@ -3,8 +3,37 @@ import java.util.Random;
 public class Demo {
     static Random random = new Random ();
 
-    public static void main(String[] args) {
-        testLesson05();
+    public static void main(String[] args)
+    {
+        testLesson06();
+    }
+
+    private static final int TREE_DEPTH = 6;
+    private static final int TREE_COUNT = 20;
+
+    public static void testLesson06 () {
+        MyTreeMap<Integer, Integer> [] maps = new MyTreeMap[20];
+        for (int i = 0; i < TREE_COUNT; i++) {
+            maps[i] = new MyTreeMap<>();
+            while ( maps[i].maxDepth() < TREE_DEPTH ) {
+                int val = random.nextInt( 200 ) - 100;
+                maps [i].put( val, val );
+            }
+        }
+
+        int[] disbalances = new int [TREE_DEPTH];
+        for (int i = 0; i < TREE_COUNT; i++) {
+            int disbalance = maps[i].getDisbalance();
+            disbalances[disbalance] ++;
+            System.out.println("Дерево " + i + " имеет максимальную и минимальную глубины "+ maps[i].maxDepth() + ", " + maps[i].minDepth() + ", дисбаланс " + maps[i].getDisbalance());
+        }
+
+        System.out.println();
+
+        System.out.println("Распределение дисбалансов");
+        for (int i = 0; i < TREE_DEPTH; i++) {
+            System.out.println("Дисбаланс " + i + " наблюдается у " + disbalances [i] + " ( " + ( disbalances [i] * 100 / TREE_COUNT )  + "% ) деревеьев");
+        }
     }
 
     public static void testLesson05 () {
