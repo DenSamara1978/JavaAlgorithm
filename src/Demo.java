@@ -1,3 +1,8 @@
+import Company.CompanyPool;
+import Company.ExcelReader;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+import java.io.IOException;
 import java.util.Random;
 
 public class Demo {
@@ -5,8 +10,44 @@ public class Demo {
 
     public static void main(String[] args)
     {
-        testLesson06();
+        testLesson07();
     }
+
+    public static void testLesson07 () {
+        testGraph();
+        testCompany();
+    }
+
+    public static void testGraph () {
+        Graph graph = new Graph(10);
+
+        graph.addEdge(0,1);
+        graph.addEdge(0,2);
+        graph.addEdge(1,3);
+        graph.addEdge(2,3);
+        graph.addEdge(3,4);
+        graph.addEdge(4,9);
+        graph.addEdge(2,5);
+        graph.addEdge(5,6);
+        graph.addEdge(6,7);
+        graph.addEdge(3,7);
+        graph.addEdge(7,8);
+        graph.addEdge(8,9);
+
+        System.out.println(graph.path(1,6));
+    }
+
+    public static void testCompany () {
+        ExcelReader reader = new ExcelReader("CompanyIndicators.xlsx");
+        CompanyPool pool = null;
+        try {
+            pool = reader.parse();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(pool.getStatisticOfCompanies());
+    }
+
 
     private static final int TREE_DEPTH = 6;
     private static final int TREE_COUNT = 20;
