@@ -10,7 +10,41 @@ public class Demo {
 
     public static void main(String[] args)
     {
-        testLesson07();
+        testLesson08();
+    }
+
+    public static void testLesson08 () {
+        ChainingHashMap<String,String> map = new ChainingHashMap<>();
+        map.put ( "One", "Один" );
+        map.put ( "Two", "Два" );
+        map.put ( "Three", "Три" );
+        map.put ( "Four", "Четыре" );
+        map.put ( "Five", "Пять" );
+        map.put ( "Six", "Шесть" );
+        map.put ( "Seven", "Семь" );
+        map.put ( "Eight", "Восемь" );
+        map.put ( "Nine", "Девять" );
+        map.put ( "Ten", "Десять" );
+        map.put ( "Eleven", "Одиннадцать" );
+        map.put ( "Twelve", "Двенадцать" );
+        map.put ( "Thirteen", "Тринадцать" );
+        map.put ( "Fourteen", "Четырнадцать" );
+        map.put ( "Fifteen", "Пятнадцать" );
+        map.put ( "Sixteen", "Шестнадцать" );
+        map.put ( "Seventeen", "Семнадцать" );
+        map.put ( "Eighteen", "Восемнадцать" );
+        map.put ( "Nineteen", "Девятнадцать" );
+        map.put ( "Twenty", "Двадцать" );
+
+        System.out.println(map);
+
+        System.out.println("\nУдаление элемента с ключом \"Seven\": " + map.remove("Seven"));
+        System.out.println();
+        System.out.println(map);
+
+        System.out.println("\nУдаление элемента с ключом \"Hundred\": " + map.remove("Hundred"));
+        System.out.println();
+        System.out.println(map);
     }
 
     public static void testLesson07 () {
